@@ -2,21 +2,22 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox, ttk
 from Quiz_data import Quiz_data
+from PIL import ImageTk, Image
 
 root = tk.Tk()
 root.title("Identifying time quiz")
 root.geometry("600x600")
 
 def start_game():
-    label.place_forget()  # hides the label
-    start_button.place_forget()  # hides the start button
-    quit_button.place_forget()  # hides the quit button
     show_question()
+
+photo = tk.PhotoImage("Assests/Home.png")
 
 label = tk.Label(root, text="Identifying time quiz", 
                 font=("Arial", 18), 
                 fg="black",
                 bg="lightblue", 
+                image = photo,
                 padx = 20,
                 pady = 10,
                 borderwidth = 2)
@@ -38,7 +39,6 @@ quit_button = tk.Button(root, text="Quit",
                         borderwidth = 2)
 quit_button.place(x = 250, y = 450)
 
-
 def skip_question():
     global current_question
     question = Quiz_data[current_question]
@@ -51,11 +51,14 @@ def skip_question():
 def show_question():
     question = Quiz_data[current_question]
     question_label.config(text=question["question"])
+    question_number = current_question + 1  # adds 1 to every question as it passes
+
+    question_label.config(text=f"Question {question_number} \n{question['question']}", font=("Arial", 16), justify = "center")  # displays the question number and the question
 
     choices = question["choices"]
     for i in range(4): # 4 options
         choice_buttons[i].config(text=choices[i], state="normal") # 'normal' meaning the button is not disabled
-
+    
     feedback_label.config(text="")
     next_button.config(state="disabled") # the user is unable to interact with the button
 
@@ -66,7 +69,7 @@ def check_answer(choice):
     if selected_choice == question["answer"]:
         global score
         score += 1
-        score_label.config(text="Score: {}/{}".format(score, len(Quiz_data))) # the format which scores are displayed in
+        score_label.config(text="Score: {}/10".format(score, len(Quiz_data))) # the format which scores are displayed in
 
         feedback_label.config(text="Correct! Well done.", foreground="green")
     else:
@@ -91,11 +94,11 @@ def show_score_window():
     score_window.geometry("600x600")
 
 # the 'n' allows the text to go to the next line
-    score_label = tk.Label(score_window, text="Congratulations!\nFinal score: {}/{}".format(score, len(Quiz_data)), font=("Arial", 14))
+    score_label = tk.Label(score_window, text="Congratulations!\nFinal score: {}/{}".format(score, len(Quiz_data)), font=("Arial", 16), bg = "lightblue")
     score_label.pack(pady=20, padx=40)
 
     quit_button = tk.Button(score_window, text="Quit", command=root.quit, width=10, height=2, bg="lightblue")
-    quit_button.pack(padx = 100)
+    quit_button.pack(pady=50, padx=90)
 
 root = tk.Tk()
 root.title("Identifying time quiz")
