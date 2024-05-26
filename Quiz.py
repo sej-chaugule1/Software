@@ -9,15 +9,12 @@ root.title("Identifying time quiz")
 root.geometry("600x600")
 
 def start_game():
-    show_question()
-
-photo = tk.PhotoImage("Assests/Home.png")
-
+    pass
+    
 label = tk.Label(root, text="Identifying time quiz", 
                 font=("Arial", 18), 
                 fg="black",
                 bg="lightblue", 
-                image = photo,
                 padx = 20,
                 pady = 10,
                 borderwidth = 2)
@@ -39,10 +36,10 @@ quit_button = tk.Button(root, text="Quit",
                         borderwidth = 2)
 quit_button.place(x = 250, y = 450)
 
+
 def skip_question():
     global current_question
     question = Quiz_data[current_question]
-    current_question += 1
 
     if current_question < len(Quiz_data):
         feedback_label.config(text="The answer is {}".format(question["answer"]), foreground="blue")
@@ -155,5 +152,3 @@ skip_button.pack (pady=15)
 current_question = 0
 
 show_question()
-
-root.mainloop()
