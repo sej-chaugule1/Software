@@ -89,7 +89,7 @@ def second_page():
     question_window.geometry("600x600")
     question_window.configure(bg="lightblue")
 
-    question_label = tk.Label(question_window, text="", bg="white")
+    question_label = tk.Label(question_window, bg="white")
     question_label.pack(pady=10)
 
     choice_buttons = []
@@ -98,7 +98,7 @@ def second_page():
         button.pack(pady=7)
         choice_buttons.append(button)
 
-    feedback_label = tk.Label(question_window, text="", bg="lightblue")
+    feedback_label = tk.Label(question_window, bg="lightblue")
     feedback_label.pack(pady=10)
 
     score = 0
@@ -111,15 +111,12 @@ def second_page():
     skip_button = ttk.Button(question_window, text="Skip", command=skip_question)
     skip_button.pack(pady=15)
 
-    image_frame2 = tk.Frame(root, bg="lightblue")
-    image_frame2.place(x=180, y=140)
-
     current_question = 0
 
-    show_question()
+    display_question()
 
 #Code to show the question when the start button is clicked
-def show_question():
+def display_question():
     global current_question
     global question_label
     global choice_buttons
@@ -159,7 +156,7 @@ def check_answer(choice):
     for button in choice_buttons:
         button.config(state="disabled") #disables the option buttons
         skip_button.config(state="disabled") #disables the skip button 
-    next_button.config(state="normal") 
+        next_button.config(state="normal") 
 
 #Button to skip questions and the feedback that will be given when clicked
 def skip_question():
@@ -172,7 +169,7 @@ def skip_question():
 
     if current_question < len(Quiz_questions):
         feedback_label.config(text="The answer is {}".format(question["answer"]), foreground="blue", font=("Comic Sans MS", 12))
-    next_button.config(state="normal") #allows the next button to be normal in order to go to the next question after skipping
+        next_button.config(state="normal") #allows the next button to be normal in order to go to the next question after skipping
 
 #Code to call the next question and if at the last question the final score window will open displaying users final score
 def next_question():
@@ -180,14 +177,14 @@ def next_question():
 
     current_question += 1
     if current_question < len(Quiz_questions):
-        show_question()
+        display_question()
         skip_button.config(state="normal") #allows the skip button to be normal on the next question
     else:
         show_score_window() #if there are no questions left the quiz will end with displaying the users score
 
 font_family_1 = "Comic Sans MS" 
 
-#Final score code:
+#Final score window code:
 def show_score_window():
     score_window = tk.Toplevel(root)
     score_window.title("Total score")
@@ -210,7 +207,6 @@ def show_score_window():
 
     quit_button = tk.Button(score_window, text="Quit", command=root.quit, width=10, height=2, bg="skyblue", font=(font_family_1, 14)) #quits the program when clicked
     quit_button.pack(pady=30, padx=90)
-
 
 #Starting page code:
 label = tk.Label(root, text="Digital and analogue time quiz", 
