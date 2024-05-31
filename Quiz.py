@@ -3,7 +3,7 @@ from tkinter import ttk
 from PIL import ImageTk, Image
 from tkinter import PhotoImage
 
-#Questions, options and answer for my quiz
+#Questions, options and answers for my quiz
 Quiz_questions = [
     {
     "question": "When the big hand is on 12 and the small hand is on 7,\nwhat is the time?",
@@ -73,7 +73,7 @@ root.configure(bg="lightblue")
 
 font_family_1 = "Comic Sans MS"
 
-#Variables for the quiz page
+#Variables for the quiz page (the second page which opens after 'start' is clicked)
 def second_page():
     global current_question
     global choice_buttons
@@ -245,6 +245,6 @@ quit_button = tk.Button(root, text="Quit",
                         height=1, 
                         bg = "sky blue",
                         borderwidth = 1)
-quit_button.place(x = 235, y = 510)
+quit_button.place(x = 229, y = 510)
 
 root.mainloop()
